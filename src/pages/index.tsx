@@ -2,12 +2,16 @@
 //import { Inter } from 'next/font/google';
 //const inter = Inter({ subsets: ['latin'] });
 
-import {NavBar} from '@/components/navbar';
+import { NavBar } from '@/components/navBar';
+import { ItemListContainer } from '@/components/itemListContainer';
 
 export default function Home() {
   return (
-    <main>
+    <>
       <NavBar/>
-    </main>
-  )
+      <main className="px-20 pt-20 h-screen bg-indigo-100">
+        <ItemListContainer greeting="Hello, World!"/>
+      </main>
+    </>
+  );
 }
