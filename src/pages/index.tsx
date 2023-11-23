@@ -6,6 +6,7 @@ import { NavBar } from '@/components/navBar';
 import { ItemListContainer } from '@/components/itemListContainer';
 
 export default function Home() {
+
   return (
     <>
       <NavBar/>
