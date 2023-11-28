@@ -22,7 +22,7 @@ const ItemCount = ({stock, initial=1, onAdd}:Props) => {
     }
 
     return(
-        <div className="flex flex-col justify-center items-end gap-1">
+        <div className="flex flex-col justify-center items-center gap-1">
             <div className="flex border border-gray-300 rounded-sm">
                 <button className="p-2 flex items-center justify-center" onClick={() => {changeCount(-1)}}>-</button>
                 <div className="border-x border-gray-300 py-2 px-4 flex items-center justify-center bg-indigo-50">

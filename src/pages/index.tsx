@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <>
       <NavBar/>
-      <main className="px-20 pt-20 h-screen bg-indigo-100">
-        <ItemListContainer greeting="Hello, World!"/>
+      <main className="px-20 pt-20 h-screen">
+        <ItemListContainer/>
       </main>
     </>
   );
