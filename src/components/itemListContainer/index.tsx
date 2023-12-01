@@ -1,11 +1,12 @@
 import { ItemList } from "../itemList";
 import { useEffect, useState } from "react";
 import { IProduct} from "@/interfaces/respo.interface";
+import { Loading } from "../loading";
 
 const ItemListContainer = () => {
-
+    const [isLoading, setIsLoading] = useState(true);
     const [listGames, setListGames] = useState<IProduct[]>([])
-
+    
     const getListGames = ():Promise<IProduct[]> => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -68,14 +69,21 @@ const ItemListContainer = () => {
             catch(e) {
                 console.log(e);
             }
+            finally {
+                setIsLoading(false);
+            }
         }
         onMount();
     }, [])
 
     return (
-        <section className="bg-indigo-100 h-auto shadow-md p-2">
-            <ItemList items={listGames}/>
-        </section>
+        <>
+            <Loading loading={isLoading} />
+            <section className="bg-indigo-100 h-auto shadow-md p-2">
+                <ItemList items={listGames}/>
+            </section>
+        </>
+        
     );
 }
 

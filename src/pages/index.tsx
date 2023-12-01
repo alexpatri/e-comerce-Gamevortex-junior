@@ -9,9 +9,9 @@ export default function Home() {
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <main className="px-20 pt-20 h-screen">
-        <ItemListContainer/>
+        <ItemListContainer />
       </main>
     </>
   );
