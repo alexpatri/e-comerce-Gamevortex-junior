@@ -2,7 +2,6 @@ interface Props {
     loading: boolean;
 }
 
-
 const Loading: React.FC<Props> = ({ loading }) => {
     return (
         <>

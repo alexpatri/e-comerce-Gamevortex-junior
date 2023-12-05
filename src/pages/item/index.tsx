@@ -2,7 +2,7 @@ import { ItemDetailContainer } from "@/components/itemDetailContainer";
 import { NavBar } from "@/components/navBar";
 import { useRouter } from "next/router";
 
-const GameInfo = () => {
+const Item = () => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -14,4 +14,4 @@ const GameInfo = () => {
   );
 };
 
-export default GameInfo;
+export default Item;

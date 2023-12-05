@@ -1,8 +1,8 @@
-import { IProduct } from "@/interfaces/respo.interface";
+import { IProduct } from "@/interfaces/product.interface";
 import { ItemCount } from "../itemCount";
 import { useState } from "react";
 
-const ItemDatail = ({title, price, pictureUrl, stock}:IProduct) => {
+const ItemDatail = ({categoryId, title, price, pictureUrl, stock}:IProduct) => {
 
     const [Istock, setStock] = useState<number>(stock);
 

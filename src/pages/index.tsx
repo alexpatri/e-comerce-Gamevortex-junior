@@ -11,6 +11,7 @@ export default function Home() {
     <>
       <NavBar />
       <main className="px-20 pt-20 h-screen">
+      <h1 className="text-3xl pb-4">Todos os Jogos</h1>
         <ItemListContainer />
       </main>
     </>
