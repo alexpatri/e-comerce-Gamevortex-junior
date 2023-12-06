@@ -5,7 +5,7 @@ const getCategory = (id?:number): Promise<ICategory[]> => {
         const category = [
             {
                 id: 1,
-                name: "Playstastion"
+                name: "PlayStation"
             },
             {
                 id: 2,
