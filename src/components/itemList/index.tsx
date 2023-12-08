@@ -6,7 +6,7 @@ interface ItemListProps {
     items: IProduct[];
 }
 
-const ItemList = ({ items }:ItemListProps) => {
+const ItemList = ({ items }:ItemListProps ) => {
     return (
         <div className="flex justify-center gap-2">
             {

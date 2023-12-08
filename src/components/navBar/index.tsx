@@ -40,7 +40,7 @@ const NavBar = () => {
                         </li>
                     )
                 })}
-                <ShoppingCart href="/"/>
+                <ShoppingCart href="/cart"/>
             </nav>
         </header>
     );

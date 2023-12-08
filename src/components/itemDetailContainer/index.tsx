@@ -14,6 +14,21 @@ const ItemDetailContainer = ({id}:Props) => {
     const [item, setItem] = useState<IProduct[]>([]);      
     
     useEffect(() => {
+
+      const itemsJSON = localStorage.getItem('items');
+      const items:IProduct[] = (itemsJSON ? JSON.parse(itemsJSON) : null);
+      
+      if(items) {
+        const foundItem = items.find((i) => i.id === id);
+
+        if(foundItem){
+          setItem([foundItem]);
+        }
+
+          setIsLoading(false);
+          return;
+      }
+
       const onMount = async () => {
         try {
             const result = await getItems(id);
@@ -32,7 +47,7 @@ const ItemDetailContainer = ({id}:Props) => {
     return (
       <>
         <Loading loading={isLoading}/>
-        {item && item.length > 0 && item[0].categoryId && (
+        {item && item.length > 0 && (
         <ItemDatail categoryId={item[0].categoryId} id={item[0].id} title={item[0].title} price={item[0].price} stock={item[0].stock} pictureUrl={item[0].pictureUrl}/> 
         )}
       </>

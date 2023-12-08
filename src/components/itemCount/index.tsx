@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from 'next/router';
 
 interface Props {
     stock:number;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const ItemCount = ({stock, initial=1, onAdd}:Props) => {
+    const router = useRouter();
 
     const [count, setCount] = useState<number>(initial);
 
@@ -19,6 +21,7 @@ const ItemCount = ({stock, initial=1, onAdd}:Props) => {
     const handleClick = () => {
         onAdd(count);
         setCount(initial);
+        router.push('/cart');
     }
 
     return(
