@@ -37,10 +37,10 @@ const ItemDatail = ({categoryId, id, title, price, pictureUrl, stock}:IProduct) 
                     {Istock ? <p>Quantidade em Estoque: {Istock}</p> : <p className="text-red-600">Fora de Estoque</p>}
                 </div>
                 <div >
-                    <ItemCount stock={Istock} initial={1} onAdd={changeStock}/>
+                    <ItemCount stock={Istock} initial={1} onAdd={changeStock} item={{categoryId, id, title, price, pictureUrl, stock}}/>
                 </div>
             </div>
-            
+             
         </section>
         
     )

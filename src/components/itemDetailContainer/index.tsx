@@ -11,7 +11,7 @@ interface Props {
 const ItemDetailContainer = ({id}:Props) => {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [item, setItem] = useState<IProduct[]>([]);      
+    const [item, setItem] = useState<IProduct[]>([]);
     
     useEffect(() => {
 

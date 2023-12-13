@@ -4,5 +4,6 @@ export interface IProduct {
     title:string;
     price:number;
     pictureUrl:string;
-    stock:number
+    stock:number;
+    quantity?:number;
 }
