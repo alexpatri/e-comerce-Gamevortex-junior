@@ -1,5 +1,5 @@
 import { IProduct } from "@/interfaces/product.interface";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 
 interface ICart {
@@ -19,10 +19,10 @@ interface IProvider {
 };
 
 const CartProvider = ({children}:IProvider) => {
-    const [items, setItens] = useState<IProduct[]>([])
+    const [items, setItems] = useState<IProduct[]>([])
 
     return (
-        <CartContext.Provider value={{items:items, setItems:setItens}}>
+        <CartContext.Provider value={{items:items, setItems:setItems}}>
             {children}
         </CartContext.Provider>
     )
