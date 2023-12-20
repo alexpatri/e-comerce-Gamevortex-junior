@@ -1,4 +1,4 @@
-import { useCart } from "@/contexts/cart.context";
+import { useCart } from "@/contexts/cart.zustand";
 import Link from "next/dist/client/link";
 import { useEffect, useState } from "react";
 

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import { IProduct } from "@/interfaces/product.interface";
-import { useCart } from "@/contexts/cart.context";
-import PreviousMap from "postcss/lib/previous-map";
+import { useCart } from "@/contexts/cart.zustand";
 
 interface Props {
     stock:number;
@@ -15,7 +14,6 @@ const ItemCount = ({stock, initial=1, onAdd, item}:Props) => {
     const router = useRouter();
 
     const [count, setCount] = useState<number>(initial);
-
     const {items, setItems} = useCart();
 
     const changeCount = (value:number) => {
@@ -25,13 +23,20 @@ const ItemCount = ({stock, initial=1, onAdd, item}:Props) => {
     }
 
     const handleClick = () => {
+        const existingItem = items.find(existingItem => existingItem.id === item.id);
+      
+        if (existingItem) {
+          const updatedItems = items.map(item => 
+            item.id === existingItem.id ? { ...item, quantity: item.quantity? item.quantity + count : count} : item
+          );
+          setItems(updatedItems);
+        } else {
+          setItems([...items, { ...item, quantity: count }]);
+        }
         onAdd(count);
         setCount(initial);
-        item = {...item, quantity:count};
-        setItems([...items, item]);
         router.push('/cart');
-
-    }
+      };
 
     return(
         <div className="flex flex-col justify-center items-end gap-1">

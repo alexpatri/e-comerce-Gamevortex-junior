@@ -1,48 +1,31 @@
 import { IProduct } from "@/interfaces/product.interface";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ItemDatail } from "../itemDatail";
 import { Loading } from "../loading";
-import { getItems } from "@/utils/getItems";
+
+import { doc, getDoc, getFirestore} from "firebase/firestore";
 
 interface Props {
-    id:number;
+    id:string;
 }
 
 const ItemDetailContainer = ({id}:Props) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [item, setItem] = useState<IProduct[]>([]);
-    
     useEffect(() => {
-
-      const itemsJSON = localStorage.getItem('items');
-      const items:IProduct[] = (itemsJSON ? JSON.parse(itemsJSON) : null);
-      
-      if(items) {
-        const foundItem = items.find((i) => i.id === id);
-
-        if(foundItem){
-          setItem([foundItem]);
-        }
-
-          setIsLoading(false);
-          return;
-      }
-
       const onMount = async () => {
-        try {
-            const result = await getItems(id);
-            setItem(result);
-        }
-        catch(e) {
-            console.log(e);
-        }
-        finally {
-          setIsLoading(false);
-        }
-    }
+        const db = getFirestore();
+        const itemRef = doc(db, "items", id);
+        getDoc(itemRef).then((snapshot) => {
+          if(snapshot.exists()) {
+            setItem([{id: snapshot.id, ...snapshot.data()} as any])
+          }
+        })
+        setIsLoading(false)
+      }
     onMount();
-    }, [id])
+  },[])
     
     return (
       <>

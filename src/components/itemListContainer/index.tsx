@@ -2,7 +2,7 @@ import { ItemList } from "../itemList";
 import { useEffect, useState } from "react";
 import { IProduct} from "@/interfaces/product.interface";
 import { Loading } from "../loading";
-import { getItems } from "@/utils/getItems";
+import { getDocs, collection, getFirestore, query, where } from "firebase/firestore";
 
 interface Props {
     categoryId?:number;
@@ -11,52 +11,34 @@ interface Props {
 const ItemListContainer = ({categoryId}:Props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [listItems, setListItems] = useState<IProduct[]>([]);
-    const [listItemsCat, setListItemsCat] = useState<IProduct[]>([]);
 
     useEffect(() => {
-        const onMount = async () => {
-            
-            const itemsJSON = localStorage.getItem('items');
-            const items:IProduct[] = (itemsJSON ? JSON.parse(itemsJSON) : null);
-            
-            if(items) {
-                if(categoryId) {
-                    setListItemsCat(items.filter((product) => product.categoryId === categoryId));
-                    setIsLoading(false);
-                    return;
-                }
+        const onMount =async () => {
+            const db = getFirestore();
+            const itemsCollection = collection(db, "items");
 
-                setListItems(items);
-                setIsLoading(false);
-                return;
+            if(categoryId) {
+                const q = query(itemsCollection, where("categoryId", "==", categoryId));
+                getDocs(q).then((snapshot) => {
+                    setListItems(snapshot.docs.map((doc) =>({id: doc.id, ...doc.data()} as any)))
+                })
             }
-            
-
-            try {
-                const items = (categoryId !== undefined ? await getItems(undefined, categoryId) : await getItems());
-                setListItems(items);
+            else {
+                getDocs(itemsCollection).then((snapshot) => {
+                    setListItems(snapshot.docs.map((doc) =>({id: doc.id, ...doc.data()} as any)))
+            })
             }
-            catch(e) {
-                console.log(e);
-            }
-            finally {
-                setIsLoading(false);
-            }
+            setIsLoading(false);
         }
 
         onMount();
-    }, []);
-
-    useEffect(() => {
-        if(!listItems || listItems.length === 0) return;
-        localStorage.setItem('items', JSON.stringify(listItems));
-    }, [listItems]);
+    }, [])
 
     return (
         <>
             <Loading loading={isLoading} />
-            <section className="bg-indigo-100 h-auto shadow-md p-2">
-                <ItemList items={listItemsCat.length !== 0? listItemsCat : listItems}/>
+            <section className="bg-indigo-100 h-auto shadow-md p-2 mb-20">
+                <ItemList items={listItems}/>
             </section>
         </>
         

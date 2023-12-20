@@ -4,8 +4,8 @@ import Link from "next/link";
 const Item = ({ id, title, price, pictureUrl, stock }:IProduct) => {
 
     return (
-        <div className="h-[26.5rem] shadow border border-gray-300 bg-gray-50 rounded-md flex flex-col">
-            <img src={pictureUrl} alt={title} className="shadow-md w-72"/>
+        <div className="h-[26.5rem] shadow border border-gray-300 bg-gray-50 rounded-md m-1 flex flex-col">
+            <img src={pictureUrl} alt={title} className="shadow-md w-[17.5rem]"/>
             <div className="flex flex-col justify-between items-start p-2">
                 <div>
                     <p><b>{title}</b></p>

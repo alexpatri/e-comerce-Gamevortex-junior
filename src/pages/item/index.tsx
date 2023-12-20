@@ -5,11 +5,11 @@ import { useRouter } from "next/router";
 const Item = () => {
   const router = useRouter();
   const { id } = router.query;
-
+  
   return (
     <>
       <NavBar />
-      <ItemDetailContainer id={Number(id)} />
+      <ItemDetailContainer id={String(id)} />
     </>
   );
 };

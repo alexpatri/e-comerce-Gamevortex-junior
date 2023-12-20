@@ -8,7 +8,7 @@ interface ItemListProps {
 
 const ItemList = ({ items }:ItemListProps ) => {
     return (
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center flex-wrap">
             {
                 items.map((i) => {
                     return (
